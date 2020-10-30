@@ -105,6 +105,7 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('backend/js/demo/datatables-demo.js')}}"></script>
+    <script src="{{ asset('backend/js/ckeditor.js')}}"></script>
     <script>
         $(function(){
             $('.select2').select2()

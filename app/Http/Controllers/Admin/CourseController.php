@@ -3,7 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CourseRequest;
+use App\Models\Category;
+use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
@@ -14,7 +19,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        //
+        $courses = Course::orderBy('title', 'ASC')->get();
+        return view('backend.course.index', compact('courses'));
     }
 
     /**
@@ -24,7 +30,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::orderBy('name', 'ASC')->get();
+        return view('backend.course.create', compact('categories'));
     }
 
     /**
@@ -33,9 +40,15 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CourseRequest $request)
     {
-        //
+        $data = $request->all();
+        $extension = $request->file('photo')->extension();
+        $image_name = date('dmyHis') . $request->input('title') . '.' . $extension;
+        $data['photo'] = Storage::putFileAs('public/course/images', $request->file('photo'), $image_name);
+        $data['user_id'] = Auth::user()->id;
+        Course::create($data);
+        return redirect()->route('course.index')->with('created', 'Kelas baru berhasil dibuat');
     }
 
     /**

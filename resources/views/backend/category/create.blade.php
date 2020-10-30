@@ -37,10 +37,6 @@
                         </span>
                     @enderror
                 </div>
-                <div class="form-group">
-                    <label for="">View</label>
-                    <input type="number" class="form-control" name="view_count" value="0">
-                </div>
                 <div class="float-right">
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </div>

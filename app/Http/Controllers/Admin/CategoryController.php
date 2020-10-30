@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
+use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
@@ -42,7 +44,7 @@ class CategoryController extends Controller
         $data = $request->all();
         $extension = $request->file('image')->extension();
         $image_name = date('dmyHis') . $request->input('name') . '.' . $extension;
-        $data['image'] = Storage::putFileAs('public/images', $request->file('image'), $image_name);
+        $data['image'] = Storage::putFileAs('public/category/images', $request->file('image'), $image_name);
         Category::create($data);
         return redirect()->route('category.index')->with('created', 'Kategori baru berhasil dibuat');
     }
@@ -55,7 +57,10 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        DB::table('categories')->where('id', $id)->increment('view_count');
+        $courses = Course::where('category_id', $id)->orderBy('title', 'ASC')->get();
+        return view('backend.category.show', compact('category', 'courses'));
     }
 
     /**
@@ -89,6 +94,11 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        if ($category->courses->count()) {
+            return redirect()->back()->with('cant-delete', 'Kategori tidak dapat dihapus karena sudah terhubung dengan data kursus');
+        }
+        $category->delete();
+        return \redirect()->route('category.index')->with('delete', 'Kategori berhasil dihapus');
     }
 }

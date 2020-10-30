@@ -21,14 +21,21 @@
 
     <li class="nav-item {{ (request()->segment(1) == 'category') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('category.index')}}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Kategori</span>
+            <i class="fas fa-fw fa-list-alt"></i>
+        <span>Kategori Kelas</span>
+        </a>
+    </li>
+
+    <li class="nav-item {{ (request()->segment(1) == 'course') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('course.index')}}">
+            <i class="fas fa-fw fa-chalkboard"></i>
+        <span>Kelas</span>
         </a>
     </li>
 
     <li class="nav-item {{ (request()->segment(1) == 'role') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('role.index')}}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
+            <i class="fas fa-fw fa-tasks"></i>
         <span>Role</span>
         </a>
     </li>

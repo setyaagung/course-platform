@@ -1,13 +1,13 @@
 @extends('layouts.backend.main')
 
-@section('title','Kategori Kelas')
+@section('title','Kelas')
 
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold">Kategori Kelas</h6>
+            <h6 class="m-0 font-weight-bold">Kelas</h6>
             <div class="float-right">
-                <a href="{{ route('category.create')}}" class="btn btn-sm btn-primary">Tambah</a>
+                <a href="{{ route('course.create')}}" class="btn btn-sm btn-primary">Tambah</a>
             </div>
         </div>
         <div class="card-body">
@@ -34,21 +34,21 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Nama</th>
-                            <th>Deskripsi</th>
-                            <th>View</th>
+                            <th>Title</th>
+                            <th>Diskon</th>
+                            <th>Harga</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($categories as $category)
+                        @foreach ($courses as $course)
                             <tr>
                                 <td>{{ $loop->iteration}}</td>
                                 <td>
-                                    <a href="{{ route('category.show',$category->id)}}">{{ $category->name }}</a>
+                                    <a href="{{ route('course.show',$course->id)}}">{{ $course->title }}</a>
                                 </td>
-                                <td>{{ $category->description}}</td>
-                                <td>{{ $category->view_count}}</td>
+                                <td>Rp {{ number_format($course->discount_price)}}</td>
+                                <td>Rp. {{ number_format($course->actual_price)}}</td>
                                 <td>
                                     <a href="" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
                                     <form action="" class="d-inline" method="POST">
