@@ -5,7 +5,7 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold">Kategori Kelas</h6>
+            <h5 class="m-0 font-weight-bold">Kategori Kelas</h5>
             <div class="float-right">
                 <a href="{{ route('category.create')}}" class="btn btn-sm btn-primary">Tambah</a>
             </div>

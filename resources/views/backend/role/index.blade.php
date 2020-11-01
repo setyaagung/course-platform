@@ -5,7 +5,7 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header">
-            <h6 class="m-0 font-weight-bold">Role Permission</h6>
+            <h5 class="m-0 font-weight-bold">Role Permission</h5>
         </div>
         <div class="card-body">
             @if ($message = Session::get('create'))

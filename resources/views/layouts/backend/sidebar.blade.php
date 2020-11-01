@@ -26,6 +26,13 @@
         </a>
     </li>
 
+    <li class="nav-item {{ (request()->segment(1) == 'instructor') ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('instructor.index')}}">
+            <i class="fas fa-fw fa-chalkboard-teacher"></i>
+        <span>Pengajar</span>
+        </a>
+    </li>
+
     <li class="nav-item {{ (request()->segment(1) == 'course') ? 'active' : '' }}">
         <a class="nav-link" href="{{ route('course.index')}}">
             <i class="fas fa-fw fa-chalkboard"></i>

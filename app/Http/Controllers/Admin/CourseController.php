@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CourseRequest;
 use App\Models\Category;
 use App\Models\Course;
+use App\Models\Instructor;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -31,7 +32,8 @@ class CourseController extends Controller
     public function create()
     {
         $categories = Category::orderBy('name', 'ASC')->get();
-        return view('backend.course.create', compact('categories'));
+        $instructors = Instructor::orderBy('name', 'ASC')->get();
+        return view('backend.course.create', compact('categories', 'instructors'));
     }
 
     /**
@@ -43,6 +45,7 @@ class CourseController extends Controller
     public function store(CourseRequest $request)
     {
         $data = $request->all();
+        $data['slug'] = Str::slug($request->title);
         $extension = $request->file('photo')->extension();
         $image_name = date('dmyHis') . $request->input('title') . '.' . $extension;
         $data['photo'] = Storage::putFileAs('public/course/images', $request->file('photo'), $image_name);
@@ -59,7 +62,8 @@ class CourseController extends Controller
      */
     public function show($id)
     {
-        //
+        $course = Course::findOrFail($id);
+        return view('backend.course.show', compact('course'));
     }
 
     /**
@@ -94,5 +98,21 @@ class CourseController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function publish(CourseRequest $request, $id)
+    {
+        $course = Course::findOrFail($id);
+        $data['status'] = $request->status == 1;
+        $course->update($data);
+        return \redirect()->back()->with('publish', 'Kelas telah disetujui untuk');
+    }
+
+    public function unpublish(CourseRequest $request, $id)
+    {
+        $course = Course::findOrFail($id);
+        $data['status'] = $request->status == 0;
+        $course->update($data);
+        return \redirect()->back()->with('unpublish', 'Kelas telah disetujui untuk');
     }
 }

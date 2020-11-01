@@ -5,7 +5,7 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header">
-            <h6 class="m-0 font-weight-bold">Input Kelas</h6>
+            <h5 class="m-0 font-weight-bold">Input Kelas</h5>
         </div>
         <div class="card-body">
             <form action="{{ route('course.store')}}" method="POST" enctype="multipart/form-data">
@@ -38,14 +38,33 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label for="">Sub Title</label>
-                    <input type="text" class="form-control @error('sub_title') is-invalid @enderror" name="sub_title" value="{{ old('sub_title')}}">
-                    @error('sub_title')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Sub Title</label>
+                            <input type="text" class="form-control @error('sub_title') is-invalid @enderror" name="sub_title" value="{{ old('sub_title')}}">
+                            @error('sub_title')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="">Pengajar</label>
+                            <select name="instructor_id" class="form-control">
+                                @foreach ($instructors as $instructor)
+                                    <option value="{{ $instructor->id}}">{{ $instructor->name}}</option>
+                                @endforeach
+                            </select>
+                            @error('instructor_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="">Deskripsi</label>
@@ -80,24 +99,6 @@
                             <input type="text" class="form-control" name="promo_video_url" value="{{ old('playlist_url')}}">
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="">Creator Status</label>
-                            <select name="creator_status" class="form-control">
-                                <option value="1">On</option>
-                                <option value="0">Off</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="">Admin Status</label>
-                            <select name="admin_status" class="form-control">
-                                <option value="1">On</option>
-                                <option value="0">Off</option>
-                            </select>
-                        </div>
-                    </div>
                 </div>
                 <div class="form-group">
                     <label for="">Kamu akan mempelajari</label>
@@ -106,6 +107,10 @@
                 <div class="form-group">
                     <label for="">Target</label>
                     <textarea class="form-control" name="target" id="target" rows="3">{{ old('target')}}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="">Persyaratan</label>
+                    <textarea class="form-control" name="requirements" id="requirements" rows="3">{{ old('requirements')}}</textarea>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
@@ -149,6 +154,11 @@
             } );
         ClassicEditor
             .create( document.querySelector( '#target' ) )
+            .catch( error => {
+                console.error( error );
+            } );
+        ClassicEditor
+            .create( document.querySelector( '#requirements' ) )
             .catch( error => {
                 console.error( error );
             } );

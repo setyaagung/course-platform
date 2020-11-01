@@ -19,17 +19,16 @@ class CreateCoursesTable extends Migration
 
             //create course
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('instructor_id');
             $table->string('title');
             $table->string('sub_title')->nullable();
+            $table->string('slug');
             $table->longText('description');
-            $table->longText('about_instructor')->nullable();
             $table->string('playlist_url');
             $table->string('tags')->nullable();
             $table->string('photo')->nullable();
             $table->string('promo_video_url')->nullable();
-            $table->tinyInteger('creator_status')->default(0); //live: 1 , not live: 0
-            $table->tinyInteger('admin_status')->default(0);  //live: 1 , not live: 0
-
+            $table->tinyInteger('status')->default(0);
             //target your student
             $table->longText('what_will_learn')->nullable();
             $table->longText('target')->nullable();

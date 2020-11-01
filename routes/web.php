@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CourseController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\InstructorController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +30,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('category', CategoryController::class);
+    Route::resource('instructor', InstructorController::class);
     Route::resource('course', CourseController::class);
+    Route::post('course/{course}/publish', [CourseController::class, 'publish'])->name('course.publish');
+    Route::post('course/{course}/unpublish', [CourseController::class, 'publish'])->name('course.unpublish');
     Route::resource('role', RoleController::class);
     Route::resource('user', UserController::class);
 });

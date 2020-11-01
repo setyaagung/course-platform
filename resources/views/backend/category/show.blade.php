@@ -5,7 +5,10 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-            <h6 class="m-0 font-weight-bold">{{ $category->name}}</h6>
+            <h5 class="m-0 font-weight-bold">{{ $category->name}}</h5>
+            <div class="float-right">
+                <a href="{{ route('category.index')}}" class="btn btn-secondary">Kembali</a>
+            </div>
         </div>
         <div class="card-body">
             <div class="row">
@@ -37,18 +40,14 @@
                 </div>
             </div>
             <div class="table-responsive">
-                <h2 class="m-0 font-weight-bold text-center">Pelatihan</h2>
+                <h2 class="m-0 font-weight-bold text-center">Kelas {{ $category->name}}</h2>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Deskripsi</th>
+                            <th>Title</th>
                             <th>Diskon</th>
                             <th>Harga</th>
-                            <th>View</th>
-                            <th>Subscriber</th>
-                            <th>Status</th>
-                            <th>Photo</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -56,14 +55,14 @@
                             <tr>
                                 <td>{{ $loop->iteration}}</td>
                                 <td>
-                                    <b>{{ $course->title}}</b> - {{ $course->description}}
+                                    <a href="{{ route('course.show',$course->id)}}"><b>{{ $course->title }}</b></a>
+                                    <p>
+                                        Author : {{$course->user->name }}<br>
+                                        {{ $course->sub_title}}
+                                    </p>
                                 </td>
-                                <td>{{ $course->discount_price}}</td>
-                                <td>{{ $course->actual_price}}</td>
-                                <td>{{ $course->view_count}}</td>
-                                <td>{{ $course->subscriber_count}}</td>
-                                <td>{{ $course->status}}</td>
-                                <td>{{ $course->photo}}</td>
+                                <td>Rp {{ number_format($course->discount_price)}}</td>
+                                <td>Rp {{ number_format($course->actual_price)}}</td>
                             </tr>
                         @endforeach
                     </tbody>

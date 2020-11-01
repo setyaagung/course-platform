@@ -1,11 +1,14 @@
 @extends('layouts.backend.main')
 
-@section('title','User')
+@section('title','Pengajar')
 
 @section('content')
     <div class="card shadow mb-4">
-        <div class="card-header">
-            <h5 class="m-0 font-weight-bold">User</h5>
+        <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+            <h5 class="m-0 font-weight-bold">Pengajar</h5>
+            <div class="float-right">
+                <a href="{{ route('instructor.create')}}" class="btn btn-sm btn-primary">Tambah</a>
+            </div>
         </div>
         <div class="card-body">
             @if ($message = Session::get('create'))
@@ -31,20 +34,31 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>Foto</th>
                             <th>Nama</th>
-                            <th>Role</th>
-                            <th>Email</th>
+                            <th>Tentang</th>
+                            <th>Job</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($users as $user)
+                        @foreach ($instructors as $instructor)
                             <tr>
                                 <td>{{ $loop->iteration}}</td>
-                                <td>{{ $user->name }}</td>
-                                <td>{{ $user->role->name}}</td>
-                                <td>{{ $user->email}}</td>
-                                <td></td>
+                                <td>
+                                    <img src="{{ Storage::url($instructor->photo)}}" class="img-fluid" style="width: 75px">
+                                </td>
+                                <td>{{ $instructor->name }}</td>
+                                <td>{{ $instructor->about}}</td>
+                                <td>{{ $instructor->job}}</td>
+                                <td>
+                                    <a href="" class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></a>
+                                    <form action="" class="d-inline" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin dihapus?')"><i class="fas fa-trash"></i></button>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
