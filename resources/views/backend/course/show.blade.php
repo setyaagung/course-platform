@@ -10,13 +10,37 @@
                 <p>{{ $course->sub_title }}</p>
             </div>
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for=""><b>Author</b></label>
                         <p>{{ $course->user->name}}</p>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for=""><b>Status</b></label>
+                        @if ($course->status == 1)
+                            <p>
+                                Published
+                                <form action="{{ route('course.unpublish',$course->id)}}" method="POST">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin mengunpublish kelas ini ?')"><i class="fas fa-trash"></i> Klik untuk mengunpublish</button>
+                                </form>
+                            </p>
+                        @else
+                            <p>
+                                Unpublished
+                                <form action="{{ route('course.publish',$course->id)}}" method="POST">
+                                    @csrf
+                                    @method('PATCH')
+                                    <button type="submit" class="btn btn-sm btn-success" onclick="return confirm('Yakin ingin mempublish kelas ini ?')"><i class="fas fa-thumbs-up"></i> Klik untuk mempublish</button>
+                                </form>
+                            </p>
+                        @endif
+                    </div>
+                </div>
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for=""><b>Kategori</b></label>
                         <p><a href="{{ route('category.show',$course->category->id)}}">{{ $course->category->name}}</a></p>
@@ -38,8 +62,8 @@
                 {!! $course->description!!}
             </div>
             <div class="form-group">
-                <label><b>Tentang Pengajar</b></label>
-                {!! $course->about_instructor!!}
+                <label><b>Tentang Pengajar</b></label><br>
+                <i>{{ $course->instructor->name }}</i> - {!! $course->instructor->about !!}
             </div>
             <div class="form-group">
                 <label><b>Playlist Url</b></label>

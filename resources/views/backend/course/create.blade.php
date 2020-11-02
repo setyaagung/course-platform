@@ -70,10 +70,6 @@
                     <label for="">Deskripsi</label>
                     <textarea class="form-control" name="description" id="description" rows="3">{{ old('description')}}</textarea>
                 </div>
-                <div class="form-group">
-                    <label for="">Tentang Instruktur</label>
-                    <textarea class="form-control" name="about_instructor" id="about_instructor" rows="3">{{ old('about_instructor')}}</textarea>
-                </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
@@ -84,7 +80,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="">Tags</label>
-                            <input type="text" class="form-control" name="tags" value="{{ old('tags')}}">
+                            <input type="text" class="form-control" name="tags[]" value="{{ old('tags')}}">
                         </div>
                     </div>
                     <div class="col-md-6">

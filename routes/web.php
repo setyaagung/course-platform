@@ -32,8 +32,8 @@ Route::middleware(['auth', 'isAdmin'])->group(function () {
     Route::resource('category', CategoryController::class);
     Route::resource('instructor', InstructorController::class);
     Route::resource('course', CourseController::class);
-    Route::post('course/{course}/publish', [CourseController::class, 'publish'])->name('course.publish');
-    Route::post('course/{course}/unpublish', [CourseController::class, 'publish'])->name('course.unpublish');
+    Route::patch('course/{course}/publish', [CourseController::class, 'publish'])->name('course.publish');
+    Route::patch('course/{course}/unpublish', [CourseController::class, 'unpublish'])->name('course.unpublish');
     Route::resource('role', RoleController::class);
     Route::resource('user', UserController::class);
 });

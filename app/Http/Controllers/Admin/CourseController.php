@@ -46,6 +46,7 @@ class CourseController extends Controller
     {
         $data = $request->all();
         $data['slug'] = Str::slug($request->title);
+        $data['tags'] = explode(',', $request->tags);
         $extension = $request->file('photo')->extension();
         $image_name = date('dmyHis') . $request->input('title') . '.' . $extension;
         $data['photo'] = Storage::putFileAs('public/course/images', $request->file('photo'), $image_name);
@@ -103,16 +104,18 @@ class CourseController extends Controller
     public function publish(CourseRequest $request, $id)
     {
         $course = Course::findOrFail($id);
-        $data['status'] = $request->status == 1;
-        $course->update($data);
-        return \redirect()->back()->with('publish', 'Kelas telah disetujui untuk');
+        $course->update([
+            'status' => 1
+        ]);
+        return redirect()->back()->with('publish', 'Kelas telah disetujui untuk');
     }
 
     public function unpublish(CourseRequest $request, $id)
     {
         $course = Course::findOrFail($id);
-        $data['status'] = $request->status == 0;
-        $course->update($data);
-        return \redirect()->back()->with('unpublish', 'Kelas telah disetujui untuk');
+        $course->update([
+            'status' => 0
+        ]);
+        return redirect()->back()->with('unpublish', 'Kelas telah disetujui untuk');
     }
 }
