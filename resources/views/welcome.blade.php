@@ -8,6 +8,7 @@
     <!-- FONT -->
     <link href="https://fonts.googleapis.com/css?family=Viga" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+    <link href="{{ asset('backend/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
     <!-- CSS -->
     <link rel="stylesheet" href="{{ asset('css/app.css')}}">
     <link rel="stylesheet" href="{{ asset('css/style.css')}}">
@@ -26,7 +27,9 @@
                     <a class="nav-item nav-link" href="#">Kelas</a>
                     <a class="nav-item nav-link" href="#">Mentor</a>
                     <a class="nav-item nav-link" href="#">Fitur</a>
-                    <a class="nav-item btn btn-primary btn-login pr-4 pl-4" href="#">Login</a>
+                    <span class="topbar-divider"></span>
+                    <a class="nav-item nav-link daftar" href="#">Daftar</a>
+                    <a class="nav-item btn btn-primary btn-login pr-4 pl-4 pt-2 pb-2" href="#">Login</a>
                 </div>
             </div>
         </div>
@@ -34,54 +37,32 @@
     <!-- JUMBOTRON -->
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h1 class="display-4">Upgrade Your Skill</h1>
-            <p class="lead">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Incidunt, consequatur!</p>
-            <a href="" class="btn btn-primary btn-login pl-3 pr-3">Daftar Sekarang </a>
+            <p class="display-4">
+                Get the latest <span>knowledge</span><br>and <span>improve</span> your skills
+            </p>
+            <p class="lead">Membangun keterampilan dengan kursus, sertifikat<br>
+                dan gelar online dari universitas dan perusahaan kelas dunia</p>
+            <a href="" class="btn btn-primary btn-login pr-4 pl-4 pt-2 pb-2">Daftar Sekarang </a>
         </div>
     </div>
 
     <!-- container -->
     <div class="container">
-        <div class="row">
-            <div class="col-lg-7 info-panel shadow-sm">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <img src="{{ asset('img/home.jpg')}}" alt="" class="img-fluid">
-                    </div>
-                    <div class="col-lg-8">
-                        <h2>React Native</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, fugit.</p>
-                    </div>
-                </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-3 info-panel shadow-sm">
+                <i class="fas fa-desktop fa-3x float-left mr-3 mb-3"></i>
+                <h4>Learn Online</h4>
+                <p>Belajar keterampilan apapun secara online</p>
             </div>
-            <div class="col-lg-4 info-panel shadow-sm ml-auto">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <img src="{{ asset('img/home.jpg')}}" alt="" class="img-fluid">
-                    </div>
-                    <div class="col-lg-8">
-                        <h2>React Native</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, fugit.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <img src="{{ asset('img/home.jpg')}}" alt="" class="img-fluid">
-                    </div>
-                    <div class="col-lg-8">
-                        <h2>React Native</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, fugit.</p>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-4">
-                        <img src="{{ asset('img/home.jpg')}}" alt="" class="img-fluid">
-                    </div>
-                    <div class="col-lg-8">
-                        <h2>React Native</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis, fugit.</p>
-                    </div>
-                </div>
+            <div class="col-lg-3 info-panel shadow-sm">
+                <i class="fas fa-chalkboard-teacher fa-3x float-left mr-3 mb-3"></i>
+                <h4>Expert Mentors</h4>
+                <p>Dilatih oleh mentor yang berpengalaman</p>
+            </div>
+            <div class="col-lg-3 info-panel shadow-sm">
+                <i class="fas fa-clock fa-3x float-left mr-3 mb-3"></i>
+                <h4>Life time access</h4>
+                <p>Mendapatkan fitur hak akses kelas selamanya</p>
             </div>
         </div>
     </div>
